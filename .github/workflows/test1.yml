@@ -1,0 +1,24 @@
+name: DevSecOps CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # Set up CodeQL
+      - uses: github/codeql-action/setup@v5
+
+      # Run CodeQL analysis
+      - name: Run CodeQL analysis
+        uses: github/codeql-action/analyze@v5
+
+      # Deploy the application
+      - name: Deploy the application
+        run: echo "Deploy the application"
