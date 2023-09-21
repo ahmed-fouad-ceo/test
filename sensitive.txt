@@ -1,0 +1,4 @@
+# Sample Code with Potential Sensitive Data
+
+API_KEY = "your-secret-api-key"
+DB_PASSWORD = "super-secret-password"
