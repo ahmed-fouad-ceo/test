@@ -1,0 +1,29 @@
+name: Sensitive Data Exposure Scan
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Gitleaks
+        run: |
+          wget https://github.com/zricethezav/gitleaks/releases/download/v7.3.0/gitleaks-linux-amd64
+          chmod +x gitleaks-linux-amd64
+          sudo mv gitleaks-linux-amd64 /usr/local/bin/gitleaks
+
+      - name: Run Gitleaks
+        run: gitleaks --path="./" --report="results.json"
+
+      - name: Upload results
+        uses: actions/upload-artifact@v2
+        with:
+          name: sensitive-data-exposure-results
+          path: results.json
